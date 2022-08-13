@@ -13,15 +13,43 @@ public class SpawnBall : MonoBehaviour
 
     private int _ballCount = 1;
 
-
-    // [SerializeField] private GameObject[] _ballArray;
+    [SerializeField] private List<GameObject> _ballList;
 
     private void Start()
     {
         _text.text = "1";
+
+        _ballList = new List<GameObject>();
+
+        for (int x = 0; x < 10; x++)
+        {
+            SpawnOnButton();
+        }
+
+        //GameObject destroyThisBall = _ballList[2];
+
+        //_ballList.Remove(destroyThisBall);
+
+        //Destroy(destroyThisBall);
+
+        //_ballList.RemoveAt(0);
+        
     }
  
-      
+      public void DeleteOnButton()
+    {
+        Destroy(_ballList[0]);
+        _ballList.RemoveAt(0);
+    }
+    
+    public void DeleteAllOnButton()
+    {
+        for (int x = _ballList.Count - 1; x >= 0; x--)
+        {
+            Destroy(_ballList[x]);
+            _ballList.RemoveAt(x);
+        }
+    }
 
     public void SpawnOnButton()
     {
@@ -31,7 +59,8 @@ public class SpawnBall : MonoBehaviour
 
         _position.x += randomX;
 
-        Instantiate(ballPrefab, _position, Quaternion.identity);
+        GameObject newBall = Instantiate(ballPrefab, _position, Quaternion.identity);
+        _ballList.Add(newBall);
 
         _ballCount++;
         _text.text = _ballCount.ToString();
