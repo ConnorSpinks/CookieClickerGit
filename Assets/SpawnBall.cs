@@ -13,10 +13,15 @@ public class SpawnBall : MonoBehaviour
 
     private int _ballCount = 1;
 
+
+    // [SerializeField] private GameObject[] _ballArray;
+
     private void Start()
     {
         _text.text = "1";
     }
+ 
+      
 
     public void SpawnOnButton()
     {
