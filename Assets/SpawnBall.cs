@@ -10,14 +10,12 @@ public class SpawnBall : MonoBehaviour
     [SerializeField] private GameObject _surpriseImage;
     [SerializeField] private Vector3 _position;
     [SerializeField] private TMP_Text _text;
-
-    private int _ballCount = 1;
-
     [SerializeField] private List<GameObject> _ballList;
+
+    private int _ballCount = 0;
 
     private void Start()
     {
-        _text.text = "1";
 
         _ballList = new List<GameObject>();
 
@@ -25,14 +23,6 @@ public class SpawnBall : MonoBehaviour
         {
             SpawnOnButton();
         }
-
-        //GameObject destroyThisBall = _ballList[2];
-
-        //_ballList.Remove(destroyThisBall);
-
-        //Destroy(destroyThisBall);
-
-        //_ballList.RemoveAt(0);
         
     }
  
@@ -40,6 +30,9 @@ public class SpawnBall : MonoBehaviour
     {
         Destroy(_ballList[0]);
         _ballList.RemoveAt(0);
+        _ballCount--;
+        _text.text = _ballCount.ToString();
+        Debug.Log("Ball Deleted");
     }
     
     public void DeleteAllOnButton()
@@ -48,12 +41,15 @@ public class SpawnBall : MonoBehaviour
         {
             Destroy(_ballList[x]);
             _ballList.RemoveAt(x);
+            _ballCount--;
+            _text.text = _ballCount.ToString();
+            Debug.Log("All Balls Deleted");
         }
     }
 
     public void SpawnOnButton()
     {
-        Debug.Log("We have activated the Button");
+        Debug.Log("Spawned Ball");
 
         float randomX = Random.Range(-0.1f, 0.1f);
 
